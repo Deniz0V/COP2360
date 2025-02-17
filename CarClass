@@ -1,0 +1,62 @@
+using System;
+
+class Car
+{
+    // Fields
+    private string make;
+    private string model;
+    private int year;
+
+    // Properties
+    public string Make
+    {
+        get { return make; }
+        set { make = value; }
+    }
+
+    public string Model
+    {
+        get { return model; }
+        set { model = value; }
+    }
+
+    public int Year
+    {
+        get { return year; }
+        set
+        {
+            if (value > 1885 && value <= DateTime.Now.Year) // Cars were invented around 1886
+                year = value;
+            else
+                throw new ArgumentException("Invalid year.");
+        }
+    }
+
+    // Constructor
+    public Car(string make, string model, int year)
+    {
+        this.Make = make;
+        this.Model = model;
+        this.Year = year;
+    }
+
+    // Method to display car details
+    public void DisplayCarInfo()
+    {
+        Console.WriteLine($"Car: {Year} {Make} {Model}");
+    }
+
+    // Main method for testing
+    static void Main()
+    {
+        try
+        {
+            Car myCar = new Car("Toyota", "Corolla", 2020);
+            myCar.DisplayCarInfo();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error: " + ex.Message);
+        }
+    }
+}
